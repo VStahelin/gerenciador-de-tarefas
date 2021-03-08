@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="wrapper ">
+        {% include 'partials/menu.html' %}
+        <div class="main-panel">
+            {% include 'partials/nav.html' %}
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-user">
+                            <div class="card-header">
+                                <h5 class="card-title">Criar Tarefa</h5>
+                            </div>
+                            <div class="card-body">
+                                <form action="{% url 'criarTarefa' %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-5 pr-1">
+                                            <label>Usuario</label>
+                                            <div class="input-group">
+                                                <select class="custom-select" name="id_usuario" required>
+                                                    <option selected></option>
+                                                    {% for usuario in lista %}
+                                                        <option value="{{ usuario.id }}">{{ usuario.nome }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 pl-1">
+                                            <label>Estado da tarefa</label>
+                                            <div class="input-group">
+                                                <select class="custom-select" name="estado_tarefa" required>
+                                                    <option selected></option>
+                                                    <option value="1">Feito</option>
+                                                    <option value="0">Pendente</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Descricao</label>
+                                                <textarea required name="descricao" class="form-control textarea"
+                                                          placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="update ml-auto mr-auto">
+                                            <button type="submit" class="btn btn-primary btn-round">Criar tarefa
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+    </script>
+{% endblock %}

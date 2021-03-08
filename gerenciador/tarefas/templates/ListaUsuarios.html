@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="wrapper ">
+    {% include 'partials/menu.html' %}
+    <div class="main-panel">
+        {% include 'partials/nav.html' %}
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Lista de usuarios</h4>
+                            <a href="{% url 'criarUsuario' %}" class="btn btn-success btn-sm">Criar usuario</a>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="col-lg-6">Usuario</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for usuario in lista %}
+                                    <tr>
+                                        <td>
+                                            {{ usuario.nome }}
+                                        </td>
+                                        <td>
+                                            <form action="{% url 'deletarUsuario' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="id_usuario" value="{{ usuario.id }}">
+                                                <input type="submit" class="btn btn-danger btn-sm"
+                                                       value="Excluir"></submitt>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="{% url 'usuario' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="usuario_id" value="{{ usuario.id }}">
+                                                <input type="submit" class="btn btn-success btn-sm" value="Detalhes"></submitt>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'partials/footer.html' %}
+    </div>
+</div>
+{% endblock %}
