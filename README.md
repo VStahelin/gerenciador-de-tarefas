@@ -111,5 +111,11 @@ python manage.py migrate
 ### Startando a aplicação
 Sempre usando o ambiente virtual
 ```sh
-python manage.py runserserver
+python manage.py runserver
+```
+
+Observação: O app sera acessível pela porta 8000
+Exemplo:
+```
+http://127.0.0.1:8000/
 ```
