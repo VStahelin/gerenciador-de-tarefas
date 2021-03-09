@@ -4,6 +4,7 @@ from ..models import Usuario
 def getTodosUsuarios():
     return Usuario.objects.all()
 
+
 def getTotalUsuarios():
     return Usuario.objects.all().count()
 
@@ -18,3 +19,7 @@ def createUsuario(nome):
 
 def deleteUsuario(id):
     Usuario.objects.filter(id=id).delete()
+
+
+def atualizarUsuario(usuario):
+    Usuario.objects.filter(pk=usuario.id).update(nome=usuario.nome)

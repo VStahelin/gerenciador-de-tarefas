@@ -37,9 +37,8 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="{% url 'usuario' %}" method="POST">
+                                            <form action="{% url 'usuario' usuario.id%}" method="POST">
                                                 {% csrf_token %}
-                                                <input type="hidden" name="usuario_id" value="{{ usuario.id }}">
                                                 <input type="submit" class="btn btn-success btn-sm" value="Detalhes"></submitt>
                                             </form>
                                         </td>

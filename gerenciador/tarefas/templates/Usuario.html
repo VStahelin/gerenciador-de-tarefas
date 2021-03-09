@@ -14,11 +14,19 @@
                             </div>
                             <div class="card-body">
                                 <div class="author">
-                                    <a href="#">
-                                        <img class="avatar border-gray" src="{% static 'img/mike.jpg' %}" alt="...">
-                                        <h5 class="title">{{ usuario.nome }}</h5>
-                                    </a>
+                                    <img class="avatar border-gray" src="{% static 'img/mike.jpg' %}" alt="...">
+                                    <h5 class="title">{{ usuario.nome }}</h5>
                                 </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <a href="{% url 'atualizarUsuario' usuario.id %}" type="submit"
+                                   class="btn btn-primary btn-round">Atualizar Usuario</a>
+                                <form action="{% url 'deletarUsuario' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id_usuario" value="{{ usuario.id }}">
+                                    <input type="submit" class="btn btn-primary btn-round"
+                                           value="Excluir Usuario"></submitt>
+                                </form>
                             </div>
                             <div class="card-footer">
                                 <hr>
@@ -59,6 +67,7 @@
                                         <th>#</th>
                                         <th class="col-6">Tarefa</th>
                                         <th>Estado</th>
+                                        <th>Opcoes</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -80,14 +89,18 @@
                                                     <button class="btn btn-secondary btn-sm dropdown-toggle"
                                                             type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                                             aria-haspopup="true" aria-expanded="false">
-                                                        Atualizar
+                                                        Estado
                                                     </button>
-                                                    <form action="{% url 'atualizarTarefa' %}" method="POST">
+                                                    <form action="{% url 'atualizarTarefa' tarefa.id %}" method="POST">
                                                         {% csrf_token %}
-                                                        <input type="hidden" name="id_tarefa" value="{{ tarefa.id }}">
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <input class="dropdown-item" type="submit" name="novo_estado" id="0" value="Pendente"></submitt>
-                                                            <input class="dropdown-item" type="submit" name="novo_estado" id="1" value="Feito" placeholder="sdfasdf"></submitt>
+                                                            <input type="hidden" name="acao" value="atualizar_estado">
+                                                            <input class="dropdown-item" type="submit"
+                                                                   name="novo_estado"
+                                                                   value="Pendente"></submitt>
+                                                            <input class="dropdown-item" type="submit"
+                                                                   name="novo_estado"
+                                                                   value="Feito"></submitt>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -100,6 +113,10 @@
                                                     <input type="submit" class="btn btn-danger btn-sm"
                                                            value="Excluir"></submitt>
                                                 </form>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'atualizarTarefa' tarefa.id %}"
+                                                   class="nc-icon nc-settings-gear-65 text-dark"></a>
                                             </td>
                                             </td>
                                         </tr>

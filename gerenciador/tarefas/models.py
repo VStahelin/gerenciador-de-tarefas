@@ -10,7 +10,7 @@ class Usuario(models.Model):
 class Tarefa(models.Model):
     descricao = models.TextField()
     concluido = models.BooleanField()
-    user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.descricao

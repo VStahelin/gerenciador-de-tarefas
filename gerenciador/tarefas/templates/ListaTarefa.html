@@ -6,68 +6,75 @@
         <div class="main-panel">
             {% include 'partials/nav.html' %}
             <div class="content">
-                <div class="col-md-12">
-                    <div class="card card-user">
-                        <div class="card-header">
-                            <h5 class="card-title">Lista de tarefas</h5>
-                            <a type="button" class="btn btn-success btn-sm" href="{% url 'criarTarefa' %}">Adicionar
-                                tarefa</a>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-striped">
-                                <thead>
+                <div class="card card-user">
+                    <div class="card-header">
+                        <h5 class="card-title">Lista de tarefas</h5>
+                        <a type="button" class="btn btn-success btn-sm" href="{% url 'criarTarefa' %}">Adicionar
+                            tarefa</a>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th class="col-6">Tarefas</th>
+                                <th>Estado</th>
+                                <th>Opcoes</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for tarefa in lista %}
                                 <tr>
-                                    <th>Usuario</th>
-                                    <th class="col-6">Tarefas</th>
-                                    <th>Estado</th>
-                                    <th>Opcoes</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for tarefa in lista %}
-                                    <tr>
-                                        <td><nobr>{{ tarefa.user.nome }}</nobr></td>
-                                        <td class="col-auto">{{ tarefa.descricao }}</td>
-                                        <td>
-                                            {% if tarefa.concluido %}
-                                                Concluido
-                                            {% else %}
-                                                Pendente
-                                            {% endif %}
-                                        </td>
-                                        <td>
-                                            <div class="dropdown">
+                                    <td>
+                                        <nobr>{{ tarefa.usuario.nome }}</nobr>
+                                    </td>
+                                    <td class="col-auto">{{ tarefa.descricao }}</td>
+                                    <td>
+                                        {% if tarefa.concluido %}
+                                            Concluido
+                                        {% else %}
+                                            Pendente
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
 
-                                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
-                                                        id="dropdownMenuButton" data-toggle="dropdown"
-                                                        aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                    Atualizar
-                                                </button>
-                                                <form action="{% url 'atualizarTarefa' %}" method="POST">
-                                                    {% csrf_token %}
-                                                    <input type="hidden" name="id_tarefa" value="{{ tarefa.id }}">
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <input class="dropdown-item" type="submit" name="novo_estado" id="0" value="Pendente"></submitt>
-                                                        <input class="dropdown-item" type="submit" name="novo_estado" id="1" value="Feito" placeholder="sdfasdf"></submitt>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        <td class="col">
-                                            <form action="{% url 'deletarTarefa' %}" method="POST">
+                                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton" data-toggle="dropdown"
+                                                    aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                Estado
+                                            </button>
+                                            <form action="{% url 'atualizarTarefa' tarefa.id %}" method="POST">
                                                 {% csrf_token %}
-                                                <input type="hidden" name="id_tarefa" value="{{ tarefa.id }}">
-                                                <input type="submit" class="btn btn-danger btn-sm"
-                                                       value="Excluir"></submitt>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <input type="hidden" name="acao" value="atualizar_estado">
+                                                    <input class="dropdown-item" type="submit" name="novo_estado"
+                                                           value="Pendente"></submitt>
+                                                    <input class="dropdown-item" type="submit" name="novo_estado"
+                                                           value="Feito"></submitt>
+                                                </div>
                                             </form>
-                                        </td>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                                        </div>
+                                    <td class="col">
+                                        <form action="{% url 'deletarTarefa' %}" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="id_tarefa" value="{{ tarefa.id }}">
+                                            <input type="submit" class="btn btn-danger btn-sm"
+                                                   value="Excluir"></submitt>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'atualizarTarefa' tarefa.id %}"
+                                           class="nc-icon nc-settings-gear-65 text-dark"></a>
+                                    </td>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

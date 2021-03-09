@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="wrapper ">
+        {% include 'partials/menu.html' %}
+        <div class="main-panel">
+            {% include 'partials/nav.html' %}
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-user">
+                            <div class="card-header">
+                                <h5 class="card-title">Criar Tarefa</h5>
+                            </div>
+                            <div class="card-body">
+                                <form action="{% url 'atualizarTarefa' tarefa.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="acao" value="atualizar_conteudo">
+                                    <div class="row">
+                                        <div class="col-md-5 pr-1">
+                                            <label>Usuario</label>
+                                            <div class="input-group">
+                                                <select class="custom-select" name="id_usuario" required>
+                                                    {% for usuario in usuarios %}
+                                                        {% if usuario == usuario.nome %}
+                                                            <option selected value="{{ usuario.id }}">{{ usuario.nome }}</option>
+                                                        {% else %}
+                                                            <option value="{{ usuario.id }}">{{ usuario.nome }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 pl-1">
+                                            <label>Estado da tarefa</label>
+                                            <div class="input-group">
+                                                <select class="custom-select" name="estado_tarefa" required>
+                                                    <option selected></option>
+                                                    <option value="1">Feito</option>
+                                                    <option value="0">Pendente</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Descricao</label>
+                                                <textarea required name="descricao" class="form-control textarea">{{ tarefa.descricao }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="update ml-auto mr-auto">
+                                            <button type="submit" class="btn btn-primary btn-round">Atualizar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+    </script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="wrapper ">
+    {% include 'partials/menu.html' %}
+    <div class="main-panel">
+        {% include 'partials/nav.html' %}
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-user">
+                        <div class="card-header">
+                            <h5 class="card-title">Atualizar Usuario de {{ usuario.nome }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="{% url 'atualizarUsuario' usuario.id%}" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-12 pr-1">
+                                        <div class="form-group">
+                                            <label>Nome</label>
+                                            <input type="text" class="form-control" placeholder="{{ usuario.nome }}" name="novo_nome" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="update ml-auto mr-auto">
+                                        <button type="submit" class="btn btn-primary btn-round">Atualizar Usuario</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

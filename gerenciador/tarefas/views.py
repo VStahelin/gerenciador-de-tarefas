@@ -19,8 +19,7 @@ def listaUsuarios(request):
     return render(request, 'ListaUsuarios.html', {'lista': usuarios})
 
 
-def usuario(request):
-    usuario_id = int(request.POST['usuario_id'])
+def usuario(request, usuario_id):
     dados = {'usuario': usuarioDao.getUsuario(usuario_id),
              'tarefas': tarefasDao.getTarefasPorUsuario(usuario_id),
              'total_tarefas': tarefasDao.getTotalTarefasPorUsuario(usuario_id),
@@ -40,6 +39,19 @@ def criarUsuario(request):
             return redirect('criarUsuario')
     else:
         return render(request, 'CriarUsuario.html')
+
+
+def atualizarUsuario(request, usuario_id):
+    if request.method == 'POST':
+        novo_nome = request.POST['novo_nome']
+        if novo_nome.strip():
+            usuarioDao.atualizarUsuario(Usuario(id=usuario_id, nome=novo_nome))
+            return redirect('listaUsuarios')
+        else:
+            return redirect('paginaErro', "nome em branco")
+    else:
+        usuario = usuarioDao.getUsuario(int(usuario_id))
+        return render(request, 'AtualizarUsuario.html', {'usuario': usuario})
 
 
 def deletarUsuario(request):
@@ -71,10 +83,14 @@ def listaTarefas(request):
 def criarTarefa(request):
     if request.method == 'POST':
         try:
-            tarefa = Tarefa(descricao=request.POST['descricao'], concluido=bool(request.POST['estado_tarefa']),
-                            user=Usuario.objects.get(pk=int(request.POST['id_usuario'])))
-            tarefasDao.criarTarefa(tarefa)
-            return redirect('listaTarefas')
+            descricao = request.POST['descricao']
+            if descricao.strip():
+                tarefa = Tarefa(descricao=descricao, concluido=bool(request.POST['estado_tarefa']),
+                                usuario=Usuario.objects.get(pk=int(request.POST['id_usuario'])))
+                tarefasDao.criarTarefa(tarefa)
+                return redirect('listaTarefas')
+            else:
+                return redirect('criarTarefa')
         except:
             return redirect('paginaErro')
     else:
@@ -82,19 +98,29 @@ def criarTarefa(request):
         return render(request, 'CriarTarefa.html', {'lista': usuarios})
 
 
-def atualizarTarefa(request):
+def atualizarTarefa(request, id_tarefa):
     if request.method == 'POST':
-        # try:
-            id_tarefa = int(request.POST['id_tarefa'])
+        if 'atualizar_estado' in request.POST['acao']:
             if 'Feito' in request.POST['novo_estado']:
                 novo_estado = True
             else:
                 novo_estado = False
-            tarefasDao.atualizarTarefa(id_tarefa, novo_estado)
+            tarefasDao.atualizarEstadoTarefa(id_tarefa, novo_estado)
             return redirect('listaTarefas')
-        # except:
-        #     return redirect('paginaErro')
+        else:
+            descricao = request.POST['descricao']
+            if descricao.strip():
+                tarefa = Tarefa(id=id_tarefa, descricao=descricao, concluido=bool(request.POST['estado_tarefa']),
+                                usuario=Usuario.objects.get(pk=int(request.POST['id_usuario'])))
+                tarefasDao.atualizarTarefa(tarefa)
+                return redirect('listaTarefas')
+            else:
+                return redirect('criarTarefa')
+    else:
+        tarefa = tarefasDao.getTarefa(id_tarefa)
+        usuarios = usuarioDao.getTodosUsuarios()
+        return render(request, 'AtualizarTarefa.html', {'tarefa': tarefa, 'usuarios': usuarios})
 
 
-def paginaErro(request):
-    return render(request, 'PaginaErro.html')
+def paginaErro(request, message):
+    return render(request, 'PaginaErro.html', {'message': message})
