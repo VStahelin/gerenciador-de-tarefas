@@ -1,14 +1,13 @@
 # Gerenciador de tarefas
 Gerenciador de tarefas em Django
 
-Servicos necessarios:
-- Python >= 3.3  
-- Git  
+Serviços necessários:
+- Python >= 3.3
 
 # Steps para utilizar o projeto
-Steps para configuralo no windows
+Steps para configura-lo no windows
 
-## Clonando repositorio
+## Clonando repositório
 ```sh
 git clone https://github.com/VStahelin/gerenciador-de-tarefas.git  
 ```
@@ -21,15 +20,15 @@ Projeto/
 
 
 Primeiro vamos configurar o banco de dados, neste projeto esta configurado para
-MySql, caso utilize outro sera nessario atualizar o porjeto com o modulo 
-respectivo do seu banco de dados.
+MySql, caso utilize outro sera mesário atualizar o projeto com o respectivo
+Modulo do seu banco de dados.
 
 ### Em de DATABASES:   
-```NAME``` sera atribuido o nome do banco de dados  
-```USER``` sera atribuido o usuario  
-```PASSWORD``` sera atribuido a sua respectiva senha  
-```HOST``` sera atribuido o dominio do seu banco de dados (localhost no nosso caso)  
-```PORT``` sera atribuido a para acessar o banco de dados
+```NAME``` sera atribuído o nome do banco de dados  
+```USER``` sera atribuído o usuario  
+```PASSWORD``` sera atribuído a sua respectiva senha  
+```HOST``` sera atribuído o domínio do seu banco de dados (localhost no nosso caso)  
+```PORT``` sera atribuído a para acessar o banco de dados
 
 #### Exemplo
 Atualmente esta configurado assim
@@ -47,8 +46,8 @@ DATABASES = {
 ```
 
 ### Em LANGUAGE_CODE
-Esta variavel define qual a linguagem padrao da sua aplicacao  
-[Confira os codigos de linguaguem](http://www.i18nguy.com/unicode/language-identifiers.html)
+Esta variável define qual a linguagem padrão da sua aplicação  
+[Confira os códigos de linguagem](http://www.i18nguy.com/unicode/language-identifiers.html)
 
 #### Exemplo
 ``` 
@@ -56,7 +55,7 @@ LANGUAGE_CODE = 'pt-br'
 ```
 
 ### Em TIME_ZONE
-Esta variavel define qual fuso horario que a aplicacao deve se basear  
+Esta variável define qual fuso horário que a aplicação deve se basear  
 [Confira as zonas suportadas](https://gist.github.com/heyalexej/8bf688fd67d7199be4a1682b3eec7568)
 
 #### Exemplo
@@ -88,7 +87,7 @@ Projeto/
 |⠀⠀⠀⠀⠀└─ activate
 
 
-## Instalando dependencias
+## Instalando dependências
 Dentro da pasta do projeto
 ```sh
 pip3 install -r requirements.txt
@@ -102,14 +101,14 @@ Projeto/
 │⠀⠀└─ manage.py  
 
 
-### Aplicando migracoes 
+### Aplicando migrações 
 Dentro da pasta "gerenciador" 
 ```sh
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-### Startando a aplicacao
+### Startando a aplicação
 Sempre usando o ambiente virtual
 ```sh
 python manage.py runserserver
