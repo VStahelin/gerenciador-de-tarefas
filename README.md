@@ -74,10 +74,6 @@ Para ativar o ambiente virtual
 ```sh
 source venv/Scripts/activate
 ```
-Para desativar o ambiente virtual
-```sh
-deactivate
-```
 
 Projeto/  
 ├─ Venv/  
@@ -102,25 +98,30 @@ Projeto/
 
 
 ### Aplicando migrações 
-Dentro da pasta "gerenciador" 
+Dentro da pasta "gerenciador"  
 ```sh
 python manage.py makemigrations
 python manage.py migrate
 ```
 
 ### Startando a aplicação
-Sempre usando o ambiente virtual
+Sempre usando o ambiente virtual  
 ```sh
 python manage.py runserver
 ```
 
 Observações: 
-O app sera acessível pela porta 8000:
+O app sera acessível pela porta 8000:  
 ```
-http://127.0.0.1:8000/
+http://127.0.0.1:8000/  
 ```
-Usuário do djago admin: admin
-senha: admin
+Usuário do djago admin: admin  
+senha: admin  
+
+Para desligar e sair do ambiente virtual do Pyhton utilize o comando:  
+```sh
+deactivate
+```
 
 ## Imagens 
 Dashboard:
