@@ -4,8 +4,8 @@ Gerenciador de tarefas em Django
 Serviços necessários:
 - Python >= 3.3
 
-# Steps para utilizar o projeto
-Steps para configura-lo no windows
+# Passo a passo para subir o projeto
+Passo a passo para subir o projeto no windows
 
 ## Clonando repositório
 ```sh
@@ -114,8 +114,31 @@ Sempre usando o ambiente virtual
 python manage.py runserver
 ```
 
-Observação: O app sera acessível pela porta 8000
-Exemplo:
+Observaçoes: 
+O app sera acessível pela porta 8000:
 ```
 http://127.0.0.1:8000/
 ```
+Usuario do djago admin: admin
+senha: admin
+
+## Imagens 
+Dashboard:
+![image](https://user-images.githubusercontent.com/42194516/110635143-89f57680-8189-11eb-8d82-dd86f55b3934.png)
+
+Lista de usuários:
+![image](https://user-images.githubusercontent.com/42194516/110633808-f7080c80-8187-11eb-8d33-57ffa457473d.png)
+
+Lista de tarefas:
+![image](https://user-images.githubusercontent.com/42194516/110635174-924db180-8189-11eb-90d2-f6059af265b3.png)
+
+Perfil do usuário:
+![image](https://user-images.githubusercontent.com/42194516/110635261-a691ae80-8189-11eb-8139-7e0bcfd81254.png)
+
+Formulário para criação de usuário:
+![image](https://user-images.githubusercontent.com/42194516/110634208-772e7200-8188-11eb-9db5-efefe519fce6.png)
+
+Formulário para criação de tarefa:
+![image](https://user-images.githubusercontent.com/42194516/110634292-91685000-8188-11eb-9cbb-c819da5b5ef7.png)
+
+
